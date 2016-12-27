@@ -1,12 +1,13 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes){
-	var LogIn = sequelize.define("LogIn", {
-		LogId: DataTypes.INTEGER
+	var Task = sequelize.define("Task", {
+		title: DataTypes.STRING,
+		description: DataTypes.STRING
 	}, {
 		classMethod:{
 			associate:function(models){
-				LogIn.belongsTo(models.User, {
+				Task.belongsTo(models.User, {
 					onDelete: "CASCADE",
 					foreignKey: {
 						allowNull:false
@@ -15,5 +16,5 @@ module.exports = function(sequelize, DataTypes){
 			}
 		}
 	});
-	return LogIn;
+	return Task;
 }
