@@ -2,34 +2,35 @@
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
-    fullName: {
-      type: DataTypes.STRING,
+    name: {
+      type:DataTypes.STRING,
+      unique:true,
       validate:{
-        len:[6,40]
+        notEmpty:true
       }
     },
-    email:{
+    email: {
       type:DataTypes.STRING,
+      unique:true,
       validate:{
         isEmail:true,
-        len:[5,30]
+        notEmpty:true
       }
     },
-    password:{
+    password: {
       type:DataTypes.STRING,
-      validate:{ 
-        len:[6,24],
-        isAlpha:{
-          msg: 'Password must only contain letters'
-        }
+      validate:{
+        notEmpty:true
       }
     }
-  }, {
-    classMethod: {
+  },{
+    classMethods: {
       associate: function(models) {
         User.hasMany(models.Task)
       }
     }
   });
+
   return User;
 };
+

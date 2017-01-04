@@ -11,7 +11,7 @@ signUpOnClick(e){
 		return(
 		<div>
 		<center>
-			<button type="button"onClick={this.signUpOnClick}>Get Started</button>
+			<button type="button" className="btn btn-pill btn-danger" onClick={this.signUpOnClick}>GET STARTED</button>
 		</center>
 		</div>
 		)

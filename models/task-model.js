@@ -1,20 +1,27 @@
 "use strict";
 
-module.exports = function(sequelize, DataTypes){
-	var Task = sequelize.define("Task", {
-		title: DataTypes.STRING,
-		description: DataTypes.STRING
-	}, {
-		classMethod:{
-			associate:function(models){
-				Task.belongsTo(models.User, {
-					onDelete: "CASCADE",
-					foreignKey: {
-						allowNull:false
-					}
-				});
-			}
-		}
-	});
-	return Task;
-}
+module.exports = function(sequelize, DataTypes) {
+  var Task = sequelize.define("Task", {
+    title: {
+      type:DataTypes.STRING,
+      unique:true
+    },
+    description:{
+      type:DataTypes.TEXT,
+      unqiue:true
+    }
+  }, {
+    classMethods: {
+      associate: function(models) {
+        Task.belongsTo(models.User, {
+          foreignKey:{
+            onDelete: "CASCADE",
+            allowNull:true
+          }
+        });
+      }
+    }
+  });
+
+  return Task;
+};

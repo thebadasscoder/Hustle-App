@@ -60,11 +60,36 @@
 	
 	var _loginPage2 = _interopRequireDefault(_loginPage);
 	
-	var _signupPage = __webpack_require__(234);
+	var _signupPage = __webpack_require__(235);
 	
 	var _signupPage2 = _interopRequireDefault(_signupPage);
 	
+	var _homepage = __webpack_require__(236);
+	
+	var _homepage2 = _interopRequireDefault(_homepage);
+	
+	var _navbar = __webpack_require__(237);
+	
+	var _navbar2 = _interopRequireDefault(_navbar);
+	
+	var _profilePage = __webpack_require__(243);
+	
+	var _profilePage2 = _interopRequireDefault(_profilePage);
+	
+	var _logoutPage = __webpack_require__(244);
+	
+	var _logoutPage2 = _interopRequireDefault(_logoutPage);
+	
+	var _createTaskPage = __webpack_require__(246);
+	
+	var _createTaskPage2 = _interopRequireDefault(_createTaskPage);
+	
+	__webpack_require__(239);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// import Timer from './components/timer-page.jsx';
+	
 	
 	//Components
 	var App = _react2.default.createClass({
@@ -74,18 +99,37 @@
 				'div',
 				null,
 				_react2.default.createElement(
+					'div',
+					{ className: 'navbar' },
+					_react2.default.createElement(_navbar2.default, null)
+				),
+				_react2.default.createElement(
 					'center',
 					null,
 					_react2.default.createElement(
-						'h1',
-						null,
-						'HUSTLE'
+						'div',
+						{ className: 'heading' },
+						_react2.default.createElement(
+							'h1',
+							{ className: 'title' },
+							'HUSTLE'
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							' Don\'t Talk About It. Be About It.'
+						)
 					)
 				),
 				this.props.children
 			);
 		}
 	});
+	// import GetTask from './components/getTask.jsx';
+	// import SingleTask from './components/singleTasks.jsx';
+	//CSS
+	//REACT
+	
 	
 	_reactDom2.default.render(_react2.default.createElement(
 		_reactRouter.Router,
@@ -93,8 +137,12 @@
 		_react2.default.createElement(
 			_reactRouter.Route,
 			{ path: '/', component: App },
-			_react2.default.createElement(_reactRouter.IndexRoute, { component: _loginPage2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _signupPage2.default })
+			_react2.default.createElement(_reactRouter.IndexRoute, { component: _homepage2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _signupPage2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'login', component: _loginPage2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'logout', component: _logoutPage2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'profile', component: _profilePage2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'createtask', component: _createTaskPage2.default })
 		)
 	), document.getElementById('root'));
 
@@ -26434,23 +26482,38 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
+	var _jquery = __webpack_require__(234);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _reactRouter = __webpack_require__(178);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var LogIn = _react2.default.createClass({
 		displayName: 'LogIn',
 		getInitialState: function getInitialState() {
-			return { email: '', password: '' };
+			return { username: '', password: '' };
 		},
 		emailChange: function emailChange(e) {
-			this.setState({ email: e.target.value });
+			this.setState({ username: e.target.value });
 		},
 		passwordChange: function passwordChange(e) {
 			this.setState({ password: e.target.value });
 		},
-		onClick: function onClick() {
-			//THIS IS WHERE THE AJAX CALL IS GOING TO GO
+		LogInUser: function LogInUser(e) {
+			_reactRouter.browserHistory.push("/profile");
+			e.preventDefault();
+			_jquery2.default.ajax({
+				url: '/login',
+				type: 'POST',
+				data: this.state
+			});
 		},
 		render: function render() {
+			console.log(this.state.username, ':Email');
+			console.log(this.state.password, ':Password');
+			console.log(this.state, 'this is my data');
 			return _react2.default.createElement(
 				'div',
 				null,
@@ -26460,16 +26523,17 @@
 					_react2.default.createElement(
 						'h1',
 						null,
-						'Login Page '
-					),
-					'EmailAddress:',
-					_react2.default.createElement('input', { type: 'text', value: this.state.email, onChange: this.emailChange }),
-					'Password:',
-					_react2.default.createElement('input', { type: 'text', value: this.state.password, onChange: this.passwordChange }),
-					_react2.default.createElement(
-						'button',
-						null,
 						'Login'
+					),
+					_react2.default.createElement(
+						'form',
+						{ onSubmit: this.LogInUser },
+						'EmailAddress:',
+						_react2.default.createElement('input', { type: 'text', name: 'email', value: this.state.username, onChange: this.emailChange, className: 'form-control' }),
+						'Password:',
+						_react2.default.createElement('input', { type: 'password', name: 'password', value: this.state.password, onChange: this.passwordChange, className: 'form-control' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'submit', value: 'LETS TAKE ACTION!', className: 'btn btn-pill btn-danger' })
 					)
 				)
 			);
@@ -26480,84 +26544,6 @@
 
 /***/ },
 /* 234 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _jquery = __webpack_require__(235);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var SignUp = _react2.default.createClass({
-		displayName: 'SignUp',
-		getInitialState: function getInitialState() {
-			return { fullName: '', email: '', password: '' };
-		},
-		nameChange: function nameChange(e) {
-			this.setState({ fullName: e.target.value });
-		},
-		emailChange: function emailChange(e) {
-			this.setState({ email: e.target.value });
-		},
-		passwordChange: function passwordChange(e) {
-			this.setState({ password: e.target.value });
-		},
-		handleSubmit: function handleSubmit(e) {
-			e.preventDefault();
-		},
-		render: function render() {
-			console.log('name:', this.state.fullName);
-			console.log('email:', this.state.email);
-			console.log('password:', this.state.password);
-			console.log(this.state.data);
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'center',
-					null,
-					_react2.default.createElement(
-						'h1',
-						null,
-						'SignUp Page'
-					),
-					_react2.default.createElement(
-						'form',
-						{ onSubmit: this.handleSubmit },
-						'FullName:',
-						_react2.default.createElement('input', { type: 'text', value: this.state.fullName, onChange: this.nameChange }),
-						_react2.default.createElement('br', null),
-						'EmailAddress:',
-						_react2.default.createElement('input', { type: 'text', value: this.state.email, onChange: this.emailChange }),
-						_react2.default.createElement('br', null),
-						'Password:',
-						_react2.default.createElement('input', { type: 'text', value: this.state.password, onChange: this.passwordChange }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'submit', value: 'onSubmit' })
-					)
-				)
-			);
-		}
-	});
-	
-	exports.default = SignUp;
-
-/***/ },
-/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -36781,6 +36767,807 @@
 	return jQuery;
 	} );
 
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _jquery = __webpack_require__(234);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var SignUp = _react2.default.createClass({
+		displayName: 'SignUp',
+		getInitialState: function getInitialState() {
+			return { name: '', email: '', password: '' };
+		},
+		nameChange: function nameChange(e) {
+			this.setState({ name: e.target.value });
+		},
+		emailChange: function emailChange(e) {
+			this.setState({ email: e.target.value });
+		},
+		passwordChange: function passwordChange(e) {
+			this.setState({ password: e.target.value });
+		},
+		createNewUser: function createNewUser(e) {
+			e.preventDefault();
+			_jquery2.default.ajax({
+				url: '/signup',
+				type: 'POST',
+				data: this.state
+			});
+			alert('Thank you for signing up!');
+		},
+		render: function render() {
+			console.log('name:', this.state.name);
+			console.log('email:', this.state.email);
+			console.log('password:', this.state.password);
+			console.log(this.state, 'state');
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'center',
+					null,
+					_react2.default.createElement(
+						'h2',
+						{ className: 'signupName' },
+						'Sign Up'
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'signupBox' },
+						_react2.default.createElement(
+							'form',
+							{ onSubmit: this.createNewUser },
+							'Name:',
+							_react2.default.createElement('input', { type: 'text', value: this.state.name, onChange: this.nameChange, className: 'form-control' }),
+							_react2.default.createElement('br', null),
+							'EmailAddress:',
+							_react2.default.createElement('input', { type: 'text', value: this.state.email, onChange: this.emailChange, className: 'form-control' }),
+							_react2.default.createElement('br', null),
+							'Password:',
+							_react2.default.createElement('input', { type: 'password', value: this.state.password, onChange: this.passwordChange, className: 'form-control' }),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement('input', { type: 'submit', value: 'SUBMIT', className: 'btn btn-pill btn-success' })
+						),
+						_react2.default.createElement(
+							'div',
+							{ id: 'link' },
+							_react2.default.createElement(
+								'a',
+								{ href: 'http://localhost:3000/login', className: 'btn btn-link', role: 'button' },
+								'LOGIN'
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+	
+	exports.default = SignUp;
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _reactRouter = __webpack_require__(178);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var HomePage = _react2.default.createClass({
+		displayName: 'HomePage',
+		signUpOnClick: function signUpOnClick(e) {
+			_reactRouter.browserHistory.push("/signup");
+			e.preventDefault();
+		},
+		render: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'center',
+					null,
+					_react2.default.createElement(
+						'button',
+						{ type: 'button', className: 'btn btn-pill btn-danger', onClick: this.signUpOnClick },
+						'GET STARTED'
+					)
+				)
+			);
+		}
+	});
+	exports.default = HomePage;
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(178);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	//React + ReactDOM 
+	var Navbar = function Navbar() {
+		return _react2.default.createElement(
+			'div',
+			{ id: 'navbar' },
+			_react2.default.createElement(
+				_reactRouter.Link,
+				{ to: '/' },
+				'HOME'
+			),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement(
+				_reactRouter.Link,
+				{ to: '/signup' },
+				'SIGNUP'
+			),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement(
+				_reactRouter.Link,
+				{ to: '/login' },
+				'LOG IN'
+			),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement(
+				_reactRouter.Link,
+				{ to: '/logout' },
+				'LOGOUT'
+			),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement(
+				_reactRouter.Link,
+				{ to: '/profile' },
+				'USERS PROFILE'
+			),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement(
+				_reactRouter.Link,
+				{ to: '/createtask' },
+				'CREATE TASK'
+			),
+			_react2.default.createElement('br', null)
+		);
+	};
+	exports.default = Navbar;
+
+/***/ },
+/* 238 */,
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(240);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(242)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./app.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./app.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(241)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "div,body{\n\tfont-family: Times New Roman;\n\tmargin:0;\n\tpadding: 0;\n}\ndiv#navbar{\ndisplay: flex;\nflex-direction:column;\njustify-content:space-around;\npadding: 0;\nmargin: 0 2px;\nmargin-left:-90px;\nlist-style: none;\n}\nh1.title{\n\tfont-family:Anurati;\n\tmargin-top: -50px;\n\tdisplay: flex;\n\tjustify-content: space-around;\n\tfont-size: 90px;\n}\ninput.text-line{\nbackground-color: transparent;;\n  color:black;\n  outline: none;\n  outline-style: none;\n  border-top:none;\n  border-left:none;\n  border-right:none;\n  border-bottom:solid red 1px;\n  padding: 3px 10px;\n}\n\ndiv#link{\n\tmargin-top: -26px;\n}\n\na{\n\tcolor:grey;\n\tmargin-left:200px;\n\n}\na.logout{\n\tdisplay:flex;\n\tjustify-content: center;\n\tmargin-left: -10px;\n}\n\ninput.form-control{\n\twidth:300px;\n}\n\np{\n font-family: Times New Roman;\n font-size: 20px;\n color:grey;\n}\n\n\n/*div#object.slideUp{\n\tvisibility: hidden;\n}\n\nul { \n\tmargin-left: -120px; \n\tlist-style-type: none;\n\tsize:20px;\n\tpadding: 0;\n}\n\n*{\n\tbox-sizing: border-box;\n}*/\n\n/*div.header{\n\tposition: absolute;\n\tmargin-right:100;\n\theight:44px;\n\twidth: 100%;\n\tbackground-color: grey;\n\tz-index: 4;\n}*/\n/*\ndiv.side-nav{\n\tposition: absolute;\n\twidth: 100%;\n\tbackground-color: grey;\n\theight:100vh;\n\tz-index: 3;\n\tpadding-top: 44px;\n}*/\n/*\ndiv.side-nav ul li{\n\tpadding: 20px 10px;\n\tborder-bottom:1px solid #green;\n}\n\ndiv.side-nav ul li a{\n\tcolor:black;\n\ttext-decoration: none;\n}\n\ndiv.side-nav ul li a i {\n\tcolor:black;\n}\n\n@media screen and (min-width:600px){\n\tdiv.side-nav{\n\t\twidth:50px;\n\t}\n\tdiv.side-nav ul li span{\n\t\tmargin-left: 200px;\n\t}\n\tdiv.side-nav ul li i {\n\t\tfont-size:26px;\n\t}\n\tdiv.side-nav ul li {\n\t\ttext-align:center;\n\t}\n}*/\n\n/*i.fa.fa-home{\n\n}\ni.fa.fa-tasks{\n\n}\ni.fa.fa-calendar{\n\n}\ni.fa.fa-list-ul{\n\n}\ni.fa.fa-clocl-o{\n\n}\n*/", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 241 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+	
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+	
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+	
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+	
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+	
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+	
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+	
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+	
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+	
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+	
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+	
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+	
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+	
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+	
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+	
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+	
+		update(obj);
+	
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+	
+	var replaceText = (function () {
+		var textStore = [];
+	
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+	
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+	
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+	
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+	
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+	
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+	
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+	
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+	
+		var blob = new Blob([css], { type: "text/css" });
+	
+		var oldSrc = linkElement.href;
+	
+		linkElement.href = URL.createObjectURL(blob);
+	
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// import {browserHistory} from 'react-router';
+	
+	var ProfilePage = _react2.default.createClass({
+		displayName: 'ProfilePage',
+		getInitialState: function getInitialState() {
+			return { text: '' };
+		},
+		handleChange: function handleChange(e) {
+			this.setState({ text: e.target.value });
+		},
+		handleSubmit: function handleSubmit(e) {
+			// browserHistory.push("/createtask")
+			e.preventDefault();
+		},
+		render: function render() {
+			console.log('Main Goal:', this.state.text);
+			console.log('PROPS?', this.props);
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'center',
+					null,
+					_react2.default.createElement(
+						'h3',
+						null,
+						'WHAT IS YOUR MAIN FOCUS FOR TODAY?'
+					),
+					_react2.default.createElement(
+						'form',
+						{ onSubmit: this.handleSubmit },
+						_react2.default.createElement('input', { type: 'text', className: 'text-line', value: this.state.text, onChange: this.handleChange })
+					)
+				)
+			);
+		}
+	});
+	
+	exports.default = ProfilePage;
+	
+	// <div className="header">
+	// 			<a href="#" className="nav=trigger"><span></span></a>
+	// 		</div>
+	
+	// 		<div className="side-nav">
+	// 			<nav>
+	// 				<ul>
+	// 					<li>
+	// 						<a href="http://localhost:3000/">
+	// 							<span><i className="fa fa-home"></i></span>
+	// 							<span>Home</span>
+	// 						</a>
+	// 					</li>
+	// 					<li>
+	// 						<a href="#">
+	// 							<span><i className="fa fa-tasks"></i></span>
+	// 							<span>Progress</span>
+	// 						</a>
+	// 					</li>
+	// 					<li>
+	// 						<a href="#">
+	// 							<span><i className="fa fa-calendar"></i></span>
+	// 							<span>Schedule</span>
+	// 						</a>
+	// 					</li>
+	// 					<li>
+	// 						<a href="#">
+	// 							<span><i className="fa fa-list-ul"></i></span>
+	// 							<span>Tasks</span>
+	// 						</a>
+	// 					</li>
+	// 					<li>
+	// 						<a href="#">
+	// 							<span><i className="fa fa-clock-o"></i></span>
+	// 							<span>Timer</span>
+	// 						</a>
+	// 					</li>
+	// 					<li>
+	// 						<a href="#">
+	// 							<span><i className="fa fa-users"></i></span>
+	// 							<span>Connect Hustlers</span>
+	// 						</a>
+	// 					</li>
+	// 				</ul>
+	// 			</nav>
+	// 		</div>
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _jquery = __webpack_require__(234);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// import {browserHistory} from 'react-router'
+	
+	var LogOut = _react2.default.createClass({
+		displayName: 'LogOut',
+		onClick: function onClick() {
+			// browserHistory.push("/")
+			_jquery2.default.ajax({
+				url: '/logout/:id',
+				type: 'GET',
+				success: function success(data) {
+					console.log(data);
+				}
+			});
+		},
+		render: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'center',
+					null,
+					_react2.default.createElement(
+						'a',
+						{ href: 'http://localhost:3000/logout', onClick: this.onClick, className: 'logout' },
+						'LOGOUT'
+					)
+				)
+			);
+		}
+	});
+	
+	exports.default = LogOut;
+
+/***/ },
+/* 245 */,
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _jquery = __webpack_require__(234);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var createTask = _react2.default.createClass({
+		displayName: 'createTask',
+		getInitialState: function getInitialState() {
+			return { email: '', title: '', text: '' };
+		},
+		emailChange: function emailChange(e) {
+			this.setState({ email: e.target.value });
+		},
+		titleChange: function titleChange(e) {
+			this.setState({ title: e.target.value });
+		},
+		textChange: function textChange(e) {
+			this.setState({ text: e.target.value });
+		},
+		createTask: function createTask(e) {
+			_jquery2.default.ajax({
+				url: '/tasks',
+				type: 'POST',
+				data: this.state
+			});
+			console.log(this.state, 'this is the state');
+		},
+		render: function render() {
+			console.log('Title:', this.state.title);
+			console.log('Text:', this.state.text);
+			console.log(this.state, 'Data is here!');
+			console.log(this.props, 'PROPS???');
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'center',
+					null,
+					_react2.default.createElement(
+						'h1',
+						null,
+						'New Task'
+					),
+					_react2.default.createElement(
+						'form',
+						{ onSubmit: this.createTask },
+						_react2.default.createElement('input', { type: 'text', value: this.state.email, onChange: this.emailChange, placeholder: 'Enter Your Email', className: 'form-control' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', value: this.state.title, onChange: this.titleChange, placeholder: 'Today I Will...', className: 'form-control' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', value: this.state.text, onChange: this.textChange, placeholder: 'Action Steps', className: 'form-control' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'submit', value: 'Submit', className: 'btn btn-pill btn-success' })
+					),
+					this.props.value
+				)
+			);
+		}
+	});
+	
+	exports.default = createTask;
 
 /***/ }
 /******/ ]);
