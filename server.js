@@ -248,3 +248,5 @@ app.get('/*',(req,res)=>{
 db.sequelize.sync().then(function(){
 	app.listen(3000)
 })
+
+//

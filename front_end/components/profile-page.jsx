@@ -34,7 +34,7 @@ handleSubmit(e){
 export default ProfilePage;
 
 
-
+//
 // <div className="header">
 // 			<a href="#" className="nav=trigger"><span></span></a>
 // 		</div>
