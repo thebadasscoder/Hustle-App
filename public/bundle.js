@@ -72,23 +72,24 @@
 	
 	var _navbar2 = _interopRequireDefault(_navbar);
 	
-	var _profilePage = __webpack_require__(243);
+	var _profilePage = __webpack_require__(238);
 	
 	var _profilePage2 = _interopRequireDefault(_profilePage);
 	
-	var _logoutPage = __webpack_require__(244);
+	var _logoutPage = __webpack_require__(239);
 	
 	var _logoutPage2 = _interopRequireDefault(_logoutPage);
 	
-	var _createTaskPage = __webpack_require__(246);
+	var _createTaskPage = __webpack_require__(240);
 	
 	var _createTaskPage2 = _interopRequireDefault(_createTaskPage);
 	
-	__webpack_require__(239);
+	__webpack_require__(241);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// import Timer from './components/timer-page.jsx';
+	//
 	
 	
 	//Components
@@ -26541,6 +26542,7 @@
 	});
 	
 	exports.default = LogIn;
+	//
 
 /***/ },
 /* 234 */
@@ -36864,6 +36866,7 @@
 	});
 	
 	exports.default = SignUp;
+	//
 
 /***/ },
 /* 236 */
@@ -36910,6 +36913,7 @@
 		}
 	});
 	exports.default = HomePage;
+	//
 
 /***/ },
 /* 237 */
@@ -36973,19 +36977,267 @@
 		);
 	};
 	exports.default = Navbar;
+	//
 
 /***/ },
-/* 238 */,
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// import {browserHistory} from 'react-router';
+	
+	var ProfilePage = _react2.default.createClass({
+		displayName: 'ProfilePage',
+		getInitialState: function getInitialState() {
+			return { text: '' };
+		},
+		handleChange: function handleChange(e) {
+			this.setState({ text: e.target.value });
+		},
+		handleSubmit: function handleSubmit(e) {
+			// browserHistory.push("/createtask")
+			e.preventDefault();
+		},
+		render: function render() {
+			console.log('Main Goal:', this.state.text);
+			console.log('PROPS?', this.props);
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'center',
+					null,
+					_react2.default.createElement(
+						'h3',
+						null,
+						'WHAT IS YOUR MAIN FOCUS FOR TODAY?'
+					),
+					_react2.default.createElement(
+						'form',
+						{ onSubmit: this.handleSubmit },
+						_react2.default.createElement('input', { type: 'text', className: 'text-line', value: this.state.text, onChange: this.handleChange })
+					)
+				)
+			);
+		}
+	});
+	
+	exports.default = ProfilePage;
+	
+	//
+	// <div className="header">
+	// 			<a href="#" className="nav=trigger"><span></span></a>
+	// 		</div>
+	
+	// 		<div className="side-nav">
+	// 			<nav>
+	// 				<ul>
+	// 					<li>
+	// 						<a href="http://localhost:3000/">
+	// 							<span><i className="fa fa-home"></i></span>
+	// 							<span>Home</span>
+	// 						</a>
+	// 					</li>
+	// 					<li>
+	// 						<a href="#">
+	// 							<span><i className="fa fa-tasks"></i></span>
+	// 							<span>Progress</span>
+	// 						</a>
+	// 					</li>
+	// 					<li>
+	// 						<a href="#">
+	// 							<span><i className="fa fa-calendar"></i></span>
+	// 							<span>Schedule</span>
+	// 						</a>
+	// 					</li>
+	// 					<li>
+	// 						<a href="#">
+	// 							<span><i className="fa fa-list-ul"></i></span>
+	// 							<span>Tasks</span>
+	// 						</a>
+	// 					</li>
+	// 					<li>
+	// 						<a href="#">
+	// 							<span><i className="fa fa-clock-o"></i></span>
+	// 							<span>Timer</span>
+	// 						</a>
+	// 					</li>
+	// 					<li>
+	// 						<a href="#">
+	// 							<span><i className="fa fa-users"></i></span>
+	// 							<span>Connect Hustlers</span>
+	// 						</a>
+	// 					</li>
+	// 				</ul>
+	// 			</nav>
+	// 		</div>
+
+/***/ },
 /* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _jquery = __webpack_require__(234);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// import {browserHistory} from 'react-router'
+	
+	var LogOut = _react2.default.createClass({
+		displayName: 'LogOut',
+		onClick: function onClick() {
+			// browserHistory.push("/")
+			_jquery2.default.ajax({
+				url: '/logout/:id',
+				type: 'GET',
+				success: function success(data) {
+					console.log(data);
+				}
+			});
+		},
+		render: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'center',
+					null,
+					_react2.default.createElement(
+						'a',
+						{ href: 'http://localhost:3000/logout', onClick: this.onClick, className: 'logout' },
+						'LOGOUT'
+					)
+				)
+			);
+		}
+	});
+	
+	exports.default = LogOut;
+	//
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(32);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _jquery = __webpack_require__(234);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var createTask = _react2.default.createClass({
+		displayName: 'createTask',
+		getInitialState: function getInitialState() {
+			return { email: '', title: '', text: '' };
+		},
+		emailChange: function emailChange(e) {
+			this.setState({ email: e.target.value });
+		},
+		titleChange: function titleChange(e) {
+			this.setState({ title: e.target.value });
+		},
+		textChange: function textChange(e) {
+			this.setState({ text: e.target.value });
+		},
+		createTask: function createTask(e) {
+			_jquery2.default.ajax({
+				url: '/tasks',
+				type: 'POST',
+				data: this.state
+			});
+			console.log(this.state, 'this is the state');
+		},
+		render: function render() {
+			console.log('Title:', this.state.title);
+			console.log('Text:', this.state.text);
+			console.log(this.state, 'Data is here!');
+			console.log(this.props, 'PROPS???');
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'center',
+					null,
+					_react2.default.createElement(
+						'h1',
+						null,
+						'New Task'
+					),
+					_react2.default.createElement(
+						'form',
+						{ onSubmit: this.createTask },
+						_react2.default.createElement('input', { type: 'text', value: this.state.email, onChange: this.emailChange, placeholder: 'Enter Your Email', className: 'form-control' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', value: this.state.title, onChange: this.titleChange, placeholder: 'Today I Will...', className: 'form-control' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', value: this.state.text, onChange: this.textChange, placeholder: 'Action Steps', className: 'form-control' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'submit', value: 'Submit', className: 'btn btn-pill btn-success' })
+					),
+					this.props.value
+				)
+			);
+		}
+	});
+	
+	exports.default = createTask;
+	//
+
+/***/ },
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(240);
+	var content = __webpack_require__(242);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(242)(content, {});
+	var update = __webpack_require__(244)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -37002,10 +37254,10 @@
 	}
 
 /***/ },
-/* 240 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(241)();
+	exports = module.exports = __webpack_require__(243)();
 	// imports
 	
 	
@@ -37016,7 +37268,7 @@
 
 
 /***/ },
-/* 241 */
+/* 243 */
 /***/ function(module, exports) {
 
 	/*
@@ -37072,7 +37324,7 @@
 
 
 /***/ },
-/* 242 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -37322,253 +37574,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ },
-/* 243 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	// import {browserHistory} from 'react-router';
-	
-	var ProfilePage = _react2.default.createClass({
-		displayName: 'ProfilePage',
-		getInitialState: function getInitialState() {
-			return { text: '' };
-		},
-		handleChange: function handleChange(e) {
-			this.setState({ text: e.target.value });
-		},
-		handleSubmit: function handleSubmit(e) {
-			// browserHistory.push("/createtask")
-			e.preventDefault();
-		},
-		render: function render() {
-			console.log('Main Goal:', this.state.text);
-			console.log('PROPS?', this.props);
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'center',
-					null,
-					_react2.default.createElement(
-						'h3',
-						null,
-						'WHAT IS YOUR MAIN FOCUS FOR TODAY?'
-					),
-					_react2.default.createElement(
-						'form',
-						{ onSubmit: this.handleSubmit },
-						_react2.default.createElement('input', { type: 'text', className: 'text-line', value: this.state.text, onChange: this.handleChange })
-					)
-				)
-			);
-		}
-	});
-	
-	exports.default = ProfilePage;
-	
-	//
-	// <div className="header">
-	// 			<a href="#" className="nav=trigger"><span></span></a>
-	// 		</div>
-	
-	// 		<div className="side-nav">
-	// 			<nav>
-	// 				<ul>
-	// 					<li>
-	// 						<a href="http://localhost:3000/">
-	// 							<span><i className="fa fa-home"></i></span>
-	// 							<span>Home</span>
-	// 						</a>
-	// 					</li>
-	// 					<li>
-	// 						<a href="#">
-	// 							<span><i className="fa fa-tasks"></i></span>
-	// 							<span>Progress</span>
-	// 						</a>
-	// 					</li>
-	// 					<li>
-	// 						<a href="#">
-	// 							<span><i className="fa fa-calendar"></i></span>
-	// 							<span>Schedule</span>
-	// 						</a>
-	// 					</li>
-	// 					<li>
-	// 						<a href="#">
-	// 							<span><i className="fa fa-list-ul"></i></span>
-	// 							<span>Tasks</span>
-	// 						</a>
-	// 					</li>
-	// 					<li>
-	// 						<a href="#">
-	// 							<span><i className="fa fa-clock-o"></i></span>
-	// 							<span>Timer</span>
-	// 						</a>
-	// 					</li>
-	// 					<li>
-	// 						<a href="#">
-	// 							<span><i className="fa fa-users"></i></span>
-	// 							<span>Connect Hustlers</span>
-	// 						</a>
-	// 					</li>
-	// 				</ul>
-	// 			</nav>
-	// 		</div>
-
-/***/ },
-/* 244 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _jquery = __webpack_require__(234);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	// import {browserHistory} from 'react-router'
-	
-	var LogOut = _react2.default.createClass({
-		displayName: 'LogOut',
-		onClick: function onClick() {
-			// browserHistory.push("/")
-			_jquery2.default.ajax({
-				url: '/logout/:id',
-				type: 'GET',
-				success: function success(data) {
-					console.log(data);
-				}
-			});
-		},
-		render: function render() {
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'center',
-					null,
-					_react2.default.createElement(
-						'a',
-						{ href: 'http://localhost:3000/logout', onClick: this.onClick, className: 'logout' },
-						'LOGOUT'
-					)
-				)
-			);
-		}
-	});
-	
-	exports.default = LogOut;
-
-/***/ },
-/* 245 */,
-/* 246 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(32);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _jquery = __webpack_require__(234);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var createTask = _react2.default.createClass({
-		displayName: 'createTask',
-		getInitialState: function getInitialState() {
-			return { email: '', title: '', text: '' };
-		},
-		emailChange: function emailChange(e) {
-			this.setState({ email: e.target.value });
-		},
-		titleChange: function titleChange(e) {
-			this.setState({ title: e.target.value });
-		},
-		textChange: function textChange(e) {
-			this.setState({ text: e.target.value });
-		},
-		createTask: function createTask(e) {
-			_jquery2.default.ajax({
-				url: '/tasks',
-				type: 'POST',
-				data: this.state
-			});
-			console.log(this.state, 'this is the state');
-		},
-		render: function render() {
-			console.log('Title:', this.state.title);
-			console.log('Text:', this.state.text);
-			console.log(this.state, 'Data is here!');
-			console.log(this.props, 'PROPS???');
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'center',
-					null,
-					_react2.default.createElement(
-						'h1',
-						null,
-						'New Task'
-					),
-					_react2.default.createElement(
-						'form',
-						{ onSubmit: this.createTask },
-						_react2.default.createElement('input', { type: 'text', value: this.state.email, onChange: this.emailChange, placeholder: 'Enter Your Email', className: 'form-control' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', value: this.state.title, onChange: this.titleChange, placeholder: 'Today I Will...', className: 'form-control' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', value: this.state.text, onChange: this.textChange, placeholder: 'Action Steps', className: 'form-control' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'submit', value: 'Submit', className: 'btn btn-pill btn-success' })
-					),
-					this.props.value
-				)
-			);
-		}
-	});
-	
-	exports.default = createTask;
 
 /***/ }
 /******/ ]);
